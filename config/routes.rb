@@ -1,5 +1,42 @@
 RailsRouting::Application.routes.draw do
 
+  resources :photos
+
+  get '/about' => 'pages#show'
+
+  get '/ships/:ship_id/pirates/:id' => 'pirates#show'
+
+  get '/ships/new' => 'ships#new', as: :new_ship
+
+  get '/ships/:id' => 'ships#show'
+
+  get '/:name' => 'pirates#show'
+
+  get '/fleets/:id' => 'ships#filtered'
+
+  get '/parent_companies' => 'parent_companies#index', as: :parent_companies
+
+  get '/parent_companies/:id/edit' => 'parent_companies#edit', as: :edit_parent_company
+
+  get '/parent_companies/:id' => 'parent_companies#show', as: :parent_company
+
+  get '/parent_companies/:parent_company_id/subsidiaries/:id' => 'subsidiaries#show', as: :parent_company_subsidiary
+
+  get '/parent_companies/:parent_company_id' => 'subsidiaries#index', as: :parent_company_subsidiaries
+
+  delete '/parent_companies/:parent_company_id/subsidiaries/:id' => 'subsidiaries#destroy'
+
+  put  '/parent_companies/:parent_company_id/subsidiaries/:subsidiary_id/employees/:id' => 'employees#update'
+
+  post '/parent_companies/:parent_company_id/subsidiaries/:subsidiary_id/employees' => 'employees#create'  
+
+  post '/parent_companies/:parent_company_id/subsidiaries/:subsidiary_id/employees' => 'employees#new', as: :new_parent_company_subsidiary_employee
+
+  get  '/parent_companies/:parent_company_id/subsidiaries/:subsidiary_id/employees' => 'employees#index', as: :parent_company_subsidiary_employees
+
+  get  '/parent_companies/:id/employees' => 'parent_companies#show_employees'
+
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
